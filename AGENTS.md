@@ -8,3 +8,5 @@
 > Commits you push to the connected branch sync back to Lovable and show up in
 > the editor, so keep the branch in a working state.
 <!-- LOVABLE:END -->
+
+- Auth uses only built-in auth users (no profiles/custom tables in v1); protected pages live under src/routes/_authenticated/ so one gate guards them all.
