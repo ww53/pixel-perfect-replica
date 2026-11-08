@@ -1,21 +1,17 @@
 # Routes
 
-TanStack Start uses **file-based routing**. Every `.tsx` file in this directory
-defines a route. Do **not** create `src/pages/`, `src/routes/_app/index.tsx`, or
-`app/layout.tsx` — those are Next.js / Remix conventions. The only root layout
-is `src/routes/__root.tsx`.
-
-## Conventions
+This is a client-side SPA using **React Router**. Routes are declared explicitly in
+`src/router.tsx`; files in this directory are just page and layout components.
 
 | File | URL |
 | --- | --- |
+| `__root.tsx` | app shell (`RootLayout`), error element, 404 page — preserve `<Outlet />` |
 | `index.tsx` | `/` |
-| `about.tsx` | `/about` |
-| `users/index.tsx` | `/users` |
-| `users/$id.tsx` | `/users/:id` (dynamic — bare `$`, no curly braces) |
-| `posts/{-$category}.tsx` | `/posts/:category?` (optional segment) |
-| `files/$.tsx` | `/files/*` (splat — read via `_splat` param, never `*`) |
-| `_layout.tsx` | layout route (renders children via `<Outlet />`) |
-| `__root.tsx` | app shell — wraps every page; preserve `<Outlet />` |
+| `auth.tsx` | `/auth` (sign in) |
+| `signup.tsx` | `/signup` |
+| `_authenticated/route.tsx` | auth gate layout — redirects to `/auth` when signed out |
+| `_authenticated/app.tsx` | `/app` |
 
-`routeTree.gen.ts` is auto-generated. Don't edit it by hand.
+To add a protected page, put it under `_authenticated/` and register it as a child of
+the `AuthenticatedLayout` route in `src/router.tsx`. Per-page `<title>`/`<meta>` are set
+with `usePageMeta` from `src/lib/page-meta.ts`.

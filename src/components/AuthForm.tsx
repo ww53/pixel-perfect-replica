@@ -1,5 +1,5 @@
 import { useState, type FormEvent } from "react";
-import { Link, useNavigate } from "@tanstack/react-router";
+import { Link, useNavigate } from "react-router";
 import { Plane } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 
@@ -24,7 +24,7 @@ export function AuthForm({ mode }: { mode: "signin" | "signup" }) {
       : await supabase.auth.signInWithPassword({ email, password });
     setLoading(false);
     if (error) return setError(error.message);
-    if (data.session) navigate({ to: "/app", replace: true });
+    if (data.session) navigate("/app", { replace: true });
     else setError("請到信箱確認帳號 / Check your email to confirm.");
   }
 
